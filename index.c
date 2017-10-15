@@ -1,19 +1,9 @@
 #include <stdio.h>
 #include <unistd.h>
-
-#ifdef __WIN32__
-	#include <winsock2.h>
-#else
-	#include <sys/socket.h>
-#endif
-
-//#include <sys/socket.h>
+#include <sys/socket.h>
 #include <stdlib.h>
 #include <netinet/in.h>
 #include <string.h>
-
-// Using
-using namespace std
 
 // Define
 #define PORT 8080

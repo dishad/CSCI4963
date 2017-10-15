@@ -20,11 +20,18 @@ int main(){
   /* Set port number, using htons function to use proper byte order */
   serverAddr.sin_port = htons(7891);
   /* Set IP address to localhost */
+  int len = 20;
+  char str[len];
+  inet_ntop( AF_INET, &serverAddr.sin_addr, str, len);  
+  printf("IP address is: %s\n", str); 
+ 
+//  inet_ntoa(serverAddr.sin_addr.s_addr));
   serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+ //printf("IP address is: %s\n", inet_ntoa(serverAddr.sin_addr.s_addr));
   /* Set all bits of the padding field to 0 */
   memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);  
 
-  /*---- Bind the address struct to the socket ----*/
+  /*ddress is: %s\n", inet_ntoa(client_addr.sin_addr));---- Bind the address struct to the socket ----*/
   bind(welcomeSocket, (struct sockaddr *) &serverAddr, sizeof(serverAddr));
 
   /*---- Listen on the socket, with 5 max connection requests queued ----*/
