@@ -28,7 +28,8 @@ int main(){
 //  inet_ntoa(serverAddr.sin_addr.s_addr));
   
   // SET IP ADDRESS
-  serverAddr.sin_addr.s_addr = inet_addr("172.31.18.149");
+  serverAddr.sin_addr.s_addr = htons(INADDR_ANY);
+  // serverAddr.sin_addr.s_addr = inet_addr("172.31.18.149");
 
   // SET PORT 
   serverAddr.sin_port = htons(7891);
