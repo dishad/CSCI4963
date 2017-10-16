@@ -66,7 +66,7 @@ int main (int argc , char *argv[])
     clilen = sizeof(struct sockaddr_in);
 
     //accept connection from an incoming client
-    clifd = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&clilen);
+    clifd = accept(sockfd, (struct sockaddr *)&client, (socklen_t*)&clilen);
     if (clifd < 0)
     {
         perror("accept failed");
