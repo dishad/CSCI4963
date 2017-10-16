@@ -19,6 +19,7 @@ using namespace std;
 int main (int argc , char *argv[])
 {
     int sockfd, clifd, c, read_size;
+    socklen_t clilen;
     struct sockaddr_in server, client;
     char buffer[256];
     string ip;
@@ -35,8 +36,8 @@ int main (int argc , char *argv[])
 
 
     //Create socket
-    socket_desc = socket(AF_INET , SOCK_STREAM , 0);
-    if (socket_desc == -1)
+    sockfd = socket(AF_INET , SOCK_STREAM , 0);
+    if (sockfd == -1)
     {
         printf("Could not create socket");
     }
@@ -65,8 +66,8 @@ int main (int argc , char *argv[])
     clilen = sizeof(struct sockaddr_in);
 
     //accept connection from an incoming client
-    client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&clilen);
-    if (client_sock < 0)
+    clifd = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&clilen);
+    if (clifd < 0)
     {
         perror("accept failed");
         return 1;
@@ -74,7 +75,7 @@ int main (int argc , char *argv[])
     puts("Connection accepted");
 
     //Receive a message from client
-    while( (read_size = recv(client_sock , buffer , 20000 , 0)) > 0 )
+    while( (read_size = recv(clifd , buffer , 20000 , 0)) > 0 )
     {
         //Send the message back to client
         write(client_sock , buffer , strlen(buffer));
