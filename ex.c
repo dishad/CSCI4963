@@ -64,13 +64,10 @@ int main(){
     error("ERROR reading from socket");
 
   printf("Here is the message: %s\n",buffer);
-
+  
   /*---- Send message to the socket of the incoming connection ----*/
   strcpy(buffer,"Hello World\n");
-
-  n = write(newSocket,buffer, 13);
-  if (n < 0) 
-    error("ERROR writing to socket");
+  send(newSocket,buffer,13,0);
 
   return 0;
 }
