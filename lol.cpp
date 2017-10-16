@@ -50,7 +50,7 @@ int main (int argc , char *argv[])
     server.sin_port = htons( 8888 );
 
     //Bind
-    if( bind(socket_desc,(struct sockaddr *)&server , sizeof(server)) < 0)
+    if( bind(sockfd,(struct sockaddr *)&server , sizeof(server)) < 0)
     {
         //print the error message
         perror("bind failed. Error");
@@ -59,7 +59,7 @@ int main (int argc , char *argv[])
     puts("bind done");
 
      //Listen
-    listen(socket_desc , 3);
+    listen(sockfd , 5);
 
     //Accept and incoming connection
     puts("Waiting for incoming connections...");
@@ -78,7 +78,7 @@ int main (int argc , char *argv[])
     while( (read_size = recv(clifd , buffer , 20000 , 0)) > 0 )
     {
         //Send the message back to client
-        write(client_sock , buffer , strlen(buffer));
+        write(clifd , buffer , strlen(buffer));
     }
 
     if(read_size == 0)
