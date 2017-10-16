@@ -6,7 +6,7 @@
 int main(){
   int sockfd, clientlen, portno, n, newSocket;
   char buffer[256];
-  struct sockaddr_in serverAddr, clientAddr, ;
+  struct sockaddr_in serverAddr, clientAddr;
   struct sockaddr_storage serverStorage;
 
   socklen_t addr_size;
@@ -64,7 +64,8 @@ int main(){
             //  dostuff(newSocket);
              exit(0);
          }
-         else close(newsockfd);
+         else 
+            close(newSocket);
   } 
   /* end of while */
   close(sockfd);
