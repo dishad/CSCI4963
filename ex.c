@@ -4,7 +4,8 @@
 #include <string.h>
 
 int main(){
-  int sockfd, clientlen, portno, n, newSocket;
+  int sockfd, portno, n, newSocket;
+  socklen_t clientlen;
   char buffer[256];
   struct sockaddr_in serverAddr, clientAddr;
   struct sockaddr_storage serverStorage;
