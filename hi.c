@@ -46,15 +46,13 @@ int main(int argc, char *argv[])
     // Creates the socket socket() --> endpoints of sockets
 
     // assign unique new address
-    bzero((char *) &serv_addr, sizeof(serv_addr));
     portno = atoi(argv[1]);
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = INADDR_ANY;
     serv_addr.sin_port = htons(portno);
 
-    if (bind(sockfd, (struct sockaddr *) &serv_addr,
-             sizeof(serv_addr)) < 0)
-             error("ERROR on binding");
+    if (bind(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
+    	error("ERROR on binding");
     // assign unique new address
 
     // wait for a connection
