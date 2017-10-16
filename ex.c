@@ -6,7 +6,7 @@
 int main(){
   int sockfd, clientlen, portno, n, newSocket;
   char buffer[256];
-  struct sockaddr_in serverAddr, clientAddr;
+  struct sockaddr_in serverAddr, clientAddr, ;
   struct sockaddr_storage serverStorage;
 
   socklen_t addr_size;
@@ -50,24 +50,42 @@ int main(){
   else
     printf("Error\n");
 
-  /*---- Accept call creates a new socket for the incoming connection ----*/
   clientlen = sizeof clientAddr;
-  newSocket = accept(sockfd, (struct sockaddr *) &clientAddr, &clientlen);
+  while (1) {
+    newSocket = accept(sockfd, (struct sockaddr *) &clientAddr, &clientlen);
+         if (newSocket < 0)
+             error("ERROR on accept");
+         n = fork();
+         if (n < 0)
+             error("ERROR on fork");
+         if (n == 0)  {
+             close(sockfd);
+             printf('hi');
+            //  dostuff(newSocket);
+             exit(0);
+         }
+         else close(newsockfd);
+  } 
+  /* end of while */
+  close(sockfd);
 
-  if (newSocket < 0) 
-    error("ERROR on accept")
+  /*---- Accept call creates a new socket for the incoming connection ----*/
+  // newSocket = accept(sockfd, (struct sockaddr *) &clientAddr, &clientlen);
+// 
+  // if (newSocket < 0) 
+    // error("ERROR on accept");
 
-  bzero(buffer,256);
-  n = read(newSocket, buffer, 255);
+  // bzero(buffer,256);
+  // n = read(newSocket, buffer, 255);
   
-  if (n < 0) 
-    error("ERROR reading from socket");
+  // if (n < 0) 
+    // error("ERROR reading from socket");
 
-  printf("Here is the message: %s\n",buffer);
+  // printf("Here is the message: %s\n",buffer);
   
   /*---- Send message to the socket of the incoming connection ----*/
-  strcpy(buffer,"Hello World\n");
-  send(newSocket,buffer,13,0);
+  // strcpy(buffer,"Hello World\n");
+  // send(newSocket,buffer,13,0);
 
   return 0;
 }
