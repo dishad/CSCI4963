@@ -54,7 +54,7 @@ int main(){
   clientlen = sizeof clientAddr;
   newSocket = accept(sockfd, (struct sockaddr *) &clientAddr, &clientlen);
 
-  if (newsockfd < 0) 
+  if (newSocket < 0) 
     error("ERROR on accept")
 
   bzero(buffer,256);
